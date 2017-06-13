@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TODO APP</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+
+      <form class="" action="index.html" method="post" id="form">
+
+        <input type="text" name="input1" placeholder="saisir un todo" class="input1" />
+        <button type="button" name="ok" class="button1">ok</button>
+      </form>
+
+      <ul id="todo-list">
+
+      </ul>
+
+  </main>
+
+
+<script type="text/javascript">
+//sélection du bouton ok
+var btn = document.querySelector('button[name="ok"]');
+//sélection de la zone de saisie
+var input1 = document.querySelector('input[name="input1"]');
+//sélection de la liste
+var todo = document.querySelector('#todo-list');
+
+btn.addEventListener('click',function(){
+  var todoli = document.createElement('li');
+  var span1 = document.createElement('span');
+
+  if (input1.value!="") {
+    //création de la saisie en liste
+  todo.appendChild(todoli);
+  span1.innerText = input1.value;
+  todoli.appendChild(span1);
+  input1.value="";
+  }
+  else{
+    alert('saisissez un todo');
+  }
+
+  //création du bouton supprimer
+  var btnsup =  document.createElement('button');
+  btnsup.innerText ='supprimer';
+  todoli.appendChild(btnsup);
+
+  //suppression de la ligne lors du click sur le bouton supprimé
+  btnsup.addEventListener('click', function(){
+    todo.removeChild(todoli);
+  })
+
+  //création du bouton fait avec l'action d'ajouter une class qui barre le texteau click
+  var btnfait = document.createElement('button');
+  btnfait.innerText = 'fait';
+  todoli.appendChild(btnfait);
+  btnfait.addEventListener('click', function(){
+    todoli.className = 'bare';
+  })
+
+  //création du bouton modifier
+  var btnmodifier = document.createElement('button');
+  btnmodifier.innerText = 'modifier';
+  todoli.appendChild(btnmodifier);
+
+  //
+  btnmodifier.addEventListener('click', function(){
+    //creation de la zone de saisie avec a l'intérieur la valeur du span en mémoire mais non appliquée
+    var inputmodifier = document.createElement('input');
+    inputmodifier.value = span1.innerText;
+    //remplacement du span par une zone de saisie lors du click sur le bouton modifier
+    btnmodifier.parentNode.firstChild = todoli.replaceChild(inputmodifier, span1);
+    //modification de la zone de saisie en span lors d'un click à côté de la zone de saisie
+    inputmodifier.onblur= function(){
+      span1.innerText = inputmodifier.value;
+      inputmodifier = todoli.replaceChild(span1,inputmodifier)
+    }
+  })
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+var btnok = document.querySelector('button[name="ok"]');
+var input1 = document.querySelector('input[name="input1"]');
+var todolist = document.querySelector('#todo-list');
+
+btnok.addEventListener('click',function(){
+  var todoli = document.createElement('li');
+  todoli.innerText = input1.value;
+
+  var suppr = document.createElement('button');
+  suppr.innerText = 'supprimer';
+  todoli.appendChild(suppr);
+  suppr.addEventListener('click',function(){
+    todolist.removeChild(this.parentNode)
+  });
+  todolist.appendChild(todoli);
+
+  var fait = document.createElement('button');
+  fait.innerText = 'fait';
+  todoli.appendChild(fait);
+  fait.addEventListener('click',function(){
+    todoli.className = "barré";})
+
+
+
+});*/
+
+  /*var $todoList = document.getElementbyId('todo-list');
+  var $todo = document.querySelector('input[name="todo"]');
+  var $btn0K = document.querySelector('button[name="ok"]');
+
+  function createTodo(todo){
+    var $li = document.createElement('li');
+    sli.innerText = todo;
+    stodoList.appenChild($li);
+
+    var $btnSuppr = document.createElement('button');
+    sbtnSuppr.innerText = 'X';
+    sbtnSuppr.onclick = function(){
+      var $liToDelete
+    }
+  }*/
+</script>
+  </body>
+</html>
